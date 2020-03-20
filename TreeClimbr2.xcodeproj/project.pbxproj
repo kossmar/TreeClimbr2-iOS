@@ -27,6 +27,9 @@
 		0DE7F07024246ED6008843DA /* GoogleService-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DE7F06F24246ED6008843DA /* GoogleService-info.plist */; };
 		0DE7F07224246F5F008843DA /* FunctionalOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7F07124246F5F008843DA /* FunctionalOperators.swift */; };
 		0DE7F074242470BA008843DA /* LocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7F073242470BA008843DA /* LocationWorker.swift */; };
+		0DE7F07624255BD6008843DA /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7F07524255BD6008843DA /* AppUtility.swift */; };
+		0DE7F07824255CF2008843DA /* TreeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7F07724255CF2008843DA /* TreeWorker.swift */; };
+		0DE7F07A24255D64008843DA /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7F07924255D64008843DA /* AppData.swift */; };
 		21A1C2268A0D4E1B55AB15AB /* Pods_TreeClimbr2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385C9A322E41210414D0A659 /* Pods_TreeClimbr2Tests.framework */; };
 		3E27F21290E5B2530BD624E4 /* Pods_TreeClimbr2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8B707E0CF1D83232E25D71 /* Pods_TreeClimbr2.framework */; };
 /* End PBXBuildFile section */
@@ -66,6 +69,9 @@
 		0DE7F06F24246ED6008843DA /* GoogleService-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-info.plist"; sourceTree = "<group>"; };
 		0DE7F07124246F5F008843DA /* FunctionalOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionalOperators.swift; sourceTree = "<group>"; };
 		0DE7F073242470BA008843DA /* LocationWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWorker.swift; sourceTree = "<group>"; };
+		0DE7F07524255BD6008843DA /* AppUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
+		0DE7F07724255CF2008843DA /* TreeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeWorker.swift; sourceTree = "<group>"; };
+		0DE7F07924255D64008843DA /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		19E8357AE3803D70C452D7F0 /* Pods-TreeClimbr2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TreeClimbr2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TreeClimbr2Tests/Pods-TreeClimbr2Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		378DDE928F5E2DBBC259C7B8 /* Pods-TreeClimbr2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TreeClimbr2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TreeClimbr2/Pods-TreeClimbr2.debug.xcconfig"; sourceTree = "<group>"; };
 		385C9A322E41210414D0A659 /* Pods_TreeClimbr2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TreeClimbr2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				0D7225582424517400108F1A /* AppDelegate.swift */,
+				0DE7F07524255BD6008843DA /* AppUtility.swift */,
+				0DE7F07924255D64008843DA /* AppData.swift */,
 				0DE7F0622424662C008843DA /* Workers */,
 				0DE7F06124246624008843DA /* Models */,
 				0DE7F060242465F8008843DA /* Scenes */,
@@ -178,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				0DE7F073242470BA008843DA /* LocationWorker.swift */,
+				0DE7F07724255CF2008843DA /* TreeWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -388,6 +397,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DE7F07624255BD6008843DA /* AppUtility.swift in Sources */,
 				0DE7F074242470BA008843DA /* LocationWorker.swift in Sources */,
 				0DE7F07224246F5F008843DA /* FunctionalOperators.swift in Sources */,
 				0D7225592424517400108F1A /* AppDelegate.swift in Sources */,
@@ -396,6 +406,7 @@
 				0DE7F0662424670C008843DA /* Tree.swift in Sources */,
 				0DE7F05924245AD5008843DA /* MapPresenter.swift in Sources */,
 				0DE7F068242467BC008843DA /* Comment.swift in Sources */,
+				0DE7F07824255CF2008843DA /* TreeWorker.swift in Sources */,
 				0DE7F06424246685008843DA /* User.swift in Sources */,
 				0DE7F06A24246859008843DA /* Photo.swift in Sources */,
 				0DE7F05C24245AD5008843DA /* MapModels.swift in Sources */,
@@ -403,6 +414,7 @@
 				0DE7F06E2424697D008843DA /* TreeAnnotationView.swift in Sources */,
 				0DE7F06C24246956008843DA /* TreeAnnotation.swift in Sources */,
 				0DE7F05A24245AD5008843DA /* MapWorker.swift in Sources */,
+				0DE7F07A24255D64008843DA /* AppData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
