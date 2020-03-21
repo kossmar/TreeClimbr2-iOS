@@ -197,7 +197,7 @@ class TreeWorker: NSObject
     }
     
     //    class func read(completion: @escaping ([Tree]?) -> Void) {
-    class func read(completion: @escaping () -> Void)
+    class func read(completion: @escaping ([Tree]?) -> Void)
     {
         AppData.sharedInstance
             .treeNode
@@ -254,10 +254,29 @@ class TreeWorker: NSObject
                 }
                 
                 print("\(#function) - \(AppData.sharedInstance.treesArr.count)")
-                //                completion(AppData.sharedInstance.treesArr)
-                completion()
+                completion(AppData.sharedInstance.treesArr)
+//                completion()
                 
             })
+    }
+    
+    class func createTreeAnnotations(treesArr: [Tree]) -> [TreeAnnotation]
+    {
+        var treeAnnotationArr = [TreeAnnotation]()
+        //            guard
+        //                let trees = trees else { return }
+        for tree in treesArr
+        {
+            let treeLat = tree.treeLatitude
+            let treeLong = tree.treeLongitude
+            let treeAnn: TreeAnnotation = TreeAnnotation()
+            treeAnn.coordinate = CLLocationCoordinate2DMake(treeLat, treeLong)
+            treeAnn.title = tree.treeName
+            treeAnn.tree = tree
+            treeAnnotationArr.append(treeAnn)
+            //                self.mapView.addAnnotation(treeAnn)
+        }
+        return treeAnnotationArr
     }
     
     //MARK: Private Functions
@@ -270,8 +289,8 @@ class TreeWorker: NSObject
             .observeSingleEvent(of: .value , with: { (snapshot) in
                 let comments = snapshot
                     .children
-                    .flatMap { $0 as? DataSnapshot }
-                    .flatMap { $0.value as? [String:Any] }
+                    .compactMap { $0 as? DataSnapshot }
+                    .compactMap { $0.value as? [String:Any] }
                 
                 for comment in comments {
                     let userIDKey = comment["userIDKey"] as! String

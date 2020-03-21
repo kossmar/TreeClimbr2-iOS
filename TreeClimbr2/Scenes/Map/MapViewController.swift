@@ -13,7 +13,8 @@ import Firebase
 
 protocol MapDisplayLogic: class
 {
-    func displayUserLocation(viewModel: Map.CenterToUser.ViewModel)
+    func displayUserRegion(viewModel: Map.CenterToUser.ViewModel)
+    func displayTreeAnnotations(viewModel: Map.ReadTrees.ViewModel)
 }
 
 class MapViewController: UIViewController, MapDisplayLogic
@@ -88,22 +89,32 @@ class MapViewController: UIViewController, MapDisplayLogic
     {
         super.viewDidAppear(animated)
         self.mapView.removeAnnotations(self.mapView.annotations)
-        self.mapViewWillStartLoadingMap(self.mapView)
+        getTrees()
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
-        
+        AppUtility.lockOrientation(.portrait)
     }
     
     override func viewWillDisappear(_ animated: Bool)
     {
+        super.viewWillDisappear(true)
+        AppUtility.lockOrientation(.all)
+        //TODO: What is this doing?
+//        guard let someHandle = handle else {return}
+//        Auth.auth().removeStateDidChangeListener(someHandle)
 
     }
     
-    func mapViewWillStartLoadingMap(_ mapView: MKMapView)
+    func getTrees()
     {
-
+        interactor?.getTrees()
+    }
+    
+    func displayTreeAnnotations(viewModel: Map.ReadTrees.ViewModel)
+    {
+        mapView.addAnnotations(viewModel.treeAnnotationArr)
     }
     
     
@@ -122,10 +133,10 @@ class MapViewController: UIViewController, MapDisplayLogic
     @IBAction func centerToUser(_ sender: Any)
     {
         let request = Map.CenterToUser.Request(userLocation: mapView.userLocation)
-        interactor?.getUserLocation(request: request)
+        interactor?.getUserRegion(request: request)
     }
     
-    func displayUserLocation(viewModel: Map.CenterToUser.ViewModel)
+    func displayUserRegion(viewModel: Map.CenterToUser.ViewModel)
     {
         self.mapView.setRegion(viewModel.region, animated: true)
         self.mapView.userTrackingMode = .follow
@@ -149,9 +160,4 @@ extension MapViewController: MapFocusDelegate
 protocol MapFocusDelegate
 {
     func focusOnTree(location: CLLocationCoordinate2D, tree: Tree)
-}
-
-extension Notification.Name
-{
-    static let didUpdateLocation = Notification.Name("didUpdateLocation")
 }

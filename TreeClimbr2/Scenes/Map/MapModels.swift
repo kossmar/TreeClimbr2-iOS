@@ -28,4 +28,19 @@ enum Map
             let region: MKCoordinateRegion
         }
     }
+    
+    enum ReadTrees
+    {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            let treeAnnotationArr: [TreeAnnotation]
+        }
+        struct ViewModel
+        {
+            let treeAnnotationArr: [TreeAnnotation]
+        }
+    }
 }

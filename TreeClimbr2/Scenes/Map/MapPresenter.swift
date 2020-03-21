@@ -10,7 +10,8 @@ import UIKit
 
 protocol MapPresentationLogic
 {
-    func presentUserLocation(response: Map.CenterToUser.Response)
+    func presentUserRegion(response: Map.CenterToUser.Response)
+    func presentTreeAnnotations(response: Map.ReadTrees.Response)
 }
 
 class MapPresenter: MapPresentationLogic
@@ -18,10 +19,15 @@ class MapPresenter: MapPresentationLogic
     
     weak var viewController: MapDisplayLogic?
     
-    func presentUserLocation(response: Map.CenterToUser.Response)
+    func presentUserRegion(response: Map.CenterToUser.Response)
     {
         let viewModel = Map.CenterToUser.ViewModel(region: response.region)
-        
+        viewController?.displayUserRegion(viewModel: viewModel)
     }
     
+    func presentTreeAnnotations(response: Map.ReadTrees.Response)
+    {
+        let viewModel = Map.ReadTrees.ViewModel(treeAnnotationArr: response.treeAnnotationArr)
+        viewController?.displayTreeAnnotations(viewModel: viewModel)
+    }
 }

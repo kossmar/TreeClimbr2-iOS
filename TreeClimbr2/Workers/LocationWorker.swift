@@ -37,7 +37,7 @@ class LocationWorker: CLLocationManager, CLLocationManagerDelegate
         NotificationCenter.default.post(name: Notification.Name.didUpdateLocation, object: self, userInfo: ["region": region])
     }
     
-    func centerToUser(location: MKUserLocation) -> MKCoordinateRegion
+    func userRegion(location: MKUserLocation) -> MKCoordinateRegion
     {
         let span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)

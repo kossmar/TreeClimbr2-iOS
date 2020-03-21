@@ -10,16 +10,18 @@ import CoreLocation
 
 protocol MapBusinessLogic
 {
-    func getUserLocation(request: Map.CenterToUser.Request)
+    func getUserRegion(request: Map.CenterToUser.Request)
+    func getTrees()
 }
 
 protocol MapDataStore
 {
-    
+    var treesArr: [Tree] { get set }
 }
 
 class MapInteractor: MapBusinessLogic, MapDataStore
 {
+    
     var presenter: MapPresentationLogic?
     var worker: MapWorker?
     var locationWorker: LocationWorker? = {
@@ -27,10 +29,21 @@ class MapInteractor: MapBusinessLogic, MapDataStore
         return locationWorker
     }()
     
-    func getUserLocation(request: Map.CenterToUser.Request)
+    var treesArr: [Tree] = [Tree]()
+    
+    func getUserRegion(request: Map.CenterToUser.Request)
     {
-        let region = locationWorker?.centerToUser(location: request.userLocation)
+        let region = locationWorker?.userRegion(location: request.userLocation)
         let response = Map.CenterToUser.Response(region: region!)
-        presenter?.presentUserLocation(response: response)
+        presenter?.presentUserRegion(response: response)
+    }
+    
+    func getTrees()
+    {
+        TreeWorker.read(completion: { trees in
+            let treeAnnotationArr: [TreeAnnotation] = TreeWorker.createTreeAnnotations(treesArr: trees!)
+            let response = Map.ReadTrees.Response(treeAnnotationArr: treeAnnotationArr)
+            self.presenter?.presentTreeAnnotations(response: response)
+        })
     }
 }
