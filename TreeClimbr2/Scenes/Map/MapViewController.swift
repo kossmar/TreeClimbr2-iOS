@@ -13,10 +13,10 @@ import Firebase
 
 protocol MapDisplayLogic: class
 {
-    
+    func displayUserLocation(viewModel: Map.CenterToUser.ViewModel)
 }
 
-class MapViewController: UIViewController, MapDisplayLogic, CLLocationManagerDelegate
+class MapViewController: UIViewController, MapDisplayLogic
 {
     
     var interactor: MapBusinessLogic?
@@ -29,7 +29,8 @@ class MapViewController: UIViewController, MapDisplayLogic, CLLocationManagerDel
     @IBOutlet weak var menuView: UIView!
     
     var userCoordinate = CLLocationCoordinate2D()
-    var locationManager = CLLocationManager()
+    var locationManager = LocationWorker()
+    
     
     // MARK: Object lifecycle
     
@@ -80,6 +81,7 @@ class MapViewController: UIViewController, MapDisplayLogic, CLLocationManagerDel
     {
         super.viewDidLoad()
         mapView.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidUpdateLocation(_:)), name: Notification.Name.didUpdateLocation, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -104,19 +106,32 @@ class MapViewController: UIViewController, MapDisplayLogic, CLLocationManagerDel
 
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    
+    @objc func onDidUpdateLocation(_ notification: Notification)
     {
-        let location = locations[0]
-        let span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-        userCoordinate = myLocation
-        let region: MKCoordinateRegion = MKCoordinateRegion(center: myLocation, span: span)
-        mapView.setRegion(region, animated: true)
-        mapView.showsUserLocation = true
-        locationManager.stopUpdatingLocation()
+        if let data = notification.userInfo as? [String:MKCoordinateRegion]
+        {
+            for (_, region) in data
+            {
+                mapView.setRegion(region, animated: true)
+                mapView.showsUserLocation = true
+            }
+        }
     }
 
+    @IBAction func centerToUser(_ sender: Any)
+    {
+        let request = Map.CenterToUser.Request(userLocation: mapView.userLocation)
+        interactor?.getUserLocation(request: request)
+    }
+    
+    func displayUserLocation(viewModel: Map.CenterToUser.ViewModel)
+    {
+        self.mapView.setRegion(viewModel.region, animated: true)
+        self.mapView.userTrackingMode = .follow
+    }
 }
+
 
 extension MapViewController: MKMapViewDelegate
 {
@@ -129,11 +144,14 @@ extension MapViewController: MapFocusDelegate
     {
         
     }
-    
-    
 }
 
 protocol MapFocusDelegate
 {
     func focusOnTree(location: CLLocationCoordinate2D, tree: Tree)
+}
+
+extension Notification.Name
+{
+    static let didUpdateLocation = Notification.Name("didUpdateLocation")
 }

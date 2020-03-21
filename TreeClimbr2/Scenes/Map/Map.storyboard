@@ -45,6 +45,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKm-kM-mNk">
                                                 <rect key="frame" x="132" y="0.0" width="52" height="66"/>
                                                 <state key="normal" image="userlocation"/>
+                                                <connections>
+                                                    <action selector="centerToUser:" destination="tDJ-gO-KZp" eventType="touchUpInside" id="bUs-Vp-4JE"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y1s-Vx-KmH">
                                                 <rect key="frame" x="194" y="0.0" width="57" height="66"/>

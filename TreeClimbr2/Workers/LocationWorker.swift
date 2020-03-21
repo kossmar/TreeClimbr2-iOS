@@ -12,8 +12,11 @@ import MapKit
 
 class LocationWorker: CLLocationManager, CLLocationManagerDelegate
 {
-    func userLocationSetup()
+    
+    override init()
     {
+        (super.init())
+        self.delegate = self
         self.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled()
@@ -21,6 +24,7 @@ class LocationWorker: CLLocationManager, CLLocationManagerDelegate
             self.desiredAccuracy = kCLLocationAccuracyBest
             self.distanceFilter = 0.1
         }
+        self.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
@@ -28,12 +32,9 @@ class LocationWorker: CLLocationManager, CLLocationManagerDelegate
         let location = locations[0]
         let span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-        //        userCoordinate = myLocation
         let region: MKCoordinateRegion = MKCoordinateRegion(center: myLocation, span: span)
-        //        mapView.setRegion(region, animated: true)
-        //        mapView.showsUserLocation = true
         self.stopUpdatingLocation()
-        // TODO: Send region and user location to Map Scene somehow
+        NotificationCenter.default.post(name: Notification.Name.didUpdateLocation, object: self, userInfo: ["region": region])
     }
     
     func centerToUser(location: MKUserLocation) -> MKCoordinateRegion

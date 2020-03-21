@@ -6,10 +6,11 @@
 
 
 import UIKit
+import CoreLocation
 
 protocol MapBusinessLogic
 {
-    
+    func getUserLocation(request: Map.CenterToUser.Request)
 }
 
 protocol MapDataStore
@@ -21,5 +22,15 @@ class MapInteractor: MapBusinessLogic, MapDataStore
 {
     var presenter: MapPresentationLogic?
     var worker: MapWorker?
+    var locationWorker: LocationWorker? = {
+        let locationWorker = LocationWorker()
+        return locationWorker
+    }()
     
+    func getUserLocation(request: Map.CenterToUser.Request)
+    {
+        let region = locationWorker?.centerToUser(location: request.userLocation)
+        let response = Map.CenterToUser.Response(region: region!)
+        presenter?.presentUserLocation(response: response)
+    }
 }

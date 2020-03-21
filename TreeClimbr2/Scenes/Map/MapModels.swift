@@ -7,21 +7,25 @@
 
 
 import UIKit
+import MapKit
 
 enum Map
 {
     // MARK: Use cases
     
-    enum Something
+    enum CenterToUser
     {
         struct Request
         {
+            let userLocation: MKUserLocation
         }
         struct Response
         {
+            let region: MKCoordinateRegion
         }
         struct ViewModel
         {
+            let region: MKCoordinateRegion
         }
     }
 }

@@ -185,8 +185,8 @@
 		0DE7F0622424662C008843DA /* Workers */ = {
 			isa = PBXGroup;
 			children = (
-				0DE7F073242470BA008843DA /* LocationWorker.swift */,
 				0DE7F07724255CF2008843DA /* TreeWorker.swift */,
+				0DE7F073242470BA008843DA /* LocationWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";

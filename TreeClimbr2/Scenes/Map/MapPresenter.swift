@@ -10,10 +10,18 @@ import UIKit
 
 protocol MapPresentationLogic
 {
+    func presentUserLocation(response: Map.CenterToUser.Response)
 }
 
 class MapPresenter: MapPresentationLogic
 {
-  weak var viewController: MapDisplayLogic?
-
+    
+    weak var viewController: MapDisplayLogic?
+    
+    func presentUserLocation(response: Map.CenterToUser.Response)
+    {
+        let viewModel = Map.CenterToUser.ViewModel(region: response.region)
+        
+    }
+    
 }
