@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tDJ-gO-KZp">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,20 +10,91 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="O7h-uj-jN5">
             <objects>
-                <viewController id="tDJ-gO-KZp" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9Ko-7V-7Op">
+                <viewController id="tDJ-gO-KZp" customClass="MapViewController" customModule="TreeClimbr2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UCp-sD-Bxu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="8Gx-zc-sff"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NdH-ix-eGN">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDp-SO-NhM">
+                                <rect key="frame" x="186.5" y="800.5" width="41" height="41.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="kDp-SO-NhM" secondAttribute="height" multiplier="1:1" id="ob3-gi-B2S"/>
+                                </constraints>
+                                <state key="normal" image="menubutton"/>
+                            </button>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLb-oz-XXB" userLabel="Menu View">
+                                <rect key="frame" x="66.5" y="716.5" width="281" height="76"/>
+                                <subviews>
+                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="77Y-qt-GbB">
+                                        <rect key="frame" x="15" y="5" width="251" height="66"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNF-SB-4nm" userLabel="MyTreesButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="56" height="66"/>
+                                                <state key="normal" image="mytreesbutton"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbB-lA-h0X">
+                                                <rect key="frame" x="66" y="0.0" width="56" height="66"/>
+                                                <state key="normal" image="treeatuserloc"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKm-kM-mNk">
+                                                <rect key="frame" x="132" y="0.0" width="52" height="66"/>
+                                                <state key="normal" image="userlocation"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y1s-Vx-KmH">
+                                                <rect key="frame" x="194" y="0.0" width="57" height="66"/>
+                                                <state key="normal" image="settingsbutton"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="77Y-qt-GbB" firstAttribute="top" secondItem="dLb-oz-XXB" secondAttribute="top" constant="5" id="2Jr-Os-SVA"/>
+                                    <constraint firstAttribute="trailing" secondItem="77Y-qt-GbB" secondAttribute="trailing" constant="15" id="V9D-8y-AiY"/>
+                                    <constraint firstItem="77Y-qt-GbB" firstAttribute="leading" secondItem="dLb-oz-XXB" secondAttribute="leading" constant="15" id="YHz-21-HBw"/>
+                                    <constraint firstAttribute="bottom" secondItem="77Y-qt-GbB" secondAttribute="bottom" constant="5" id="fKd-ng-pyH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="NdH-ix-eGN" firstAttribute="leading" secondItem="iXa-FN-iZa" secondAttribute="leading" id="3Sv-W7-pB1"/>
+                            <constraint firstItem="kDp-SO-NhM" firstAttribute="top" secondItem="dLb-oz-XXB" secondAttribute="bottom" constant="8" id="5Hx-ta-Ltt"/>
+                            <constraint firstItem="iXa-FN-iZa" firstAttribute="bottom" secondItem="kDp-SO-NhM" secondAttribute="bottom" constant="20" id="GZL-MM-zkw"/>
+                            <constraint firstItem="kDp-SO-NhM" firstAttribute="centerX" secondItem="UCp-sD-Bxu" secondAttribute="centerX" id="H0P-ne-akG"/>
+                            <constraint firstItem="NdH-ix-eGN" firstAttribute="bottom" secondItem="UCp-sD-Bxu" secondAttribute="bottom" id="JD2-Kl-Vaz"/>
+                            <constraint firstItem="dLb-oz-XXB" firstAttribute="centerX" secondItem="UCp-sD-Bxu" secondAttribute="centerX" id="ZtI-4z-kqv"/>
+                            <constraint firstItem="kDp-SO-NhM" firstAttribute="width" secondItem="UCp-sD-Bxu" secondAttribute="width" multiplier="0.1" id="eP2-rN-qBa"/>
+                            <constraint firstItem="NdH-ix-eGN" firstAttribute="trailing" secondItem="iXa-FN-iZa" secondAttribute="trailing" id="q1F-B3-e6d"/>
+                            <constraint firstItem="NdH-ix-eGN" firstAttribute="top" secondItem="UCp-sD-Bxu" secondAttribute="top" id="qtg-uY-vlt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iXa-FN-iZa"/>
                     </view>
+                    <connections>
+                        <outlet property="addTreeToLocationButton" destination="gbB-lA-h0X" id="mtt-JA-I8w"/>
+                        <outlet property="mapView" destination="NdH-ix-eGN" id="9cC-h9-6k1"/>
+                        <outlet property="menuButton" destination="kDp-SO-NhM" id="PcC-Zn-28F"/>
+                        <outlet property="menuView" destination="dLb-oz-XXB" id="NSs-Ir-n9m"/>
+                        <outlet property="treeListButton" destination="sNF-SB-4nm" id="GK5-Tc-ApV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ogT-am-P22" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-349" y="41"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="menubutton" width="81" height="81"/>
+        <image name="mytreesbutton" width="56" height="66"/>
+        <image name="settingsbutton" width="57" height="53"/>
+        <image name="treeatuserloc" width="56" height="64"/>
+        <image name="userlocation" width="52" height="53"/>
+    </resources>
 </document>

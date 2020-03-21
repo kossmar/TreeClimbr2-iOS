@@ -16,6 +16,9 @@
 
 #import <Foundation/Foundation.h>
 
+#import "FIRMultiFactorInfo.h"
+#import "FIRAuthInternalErrors.h"
+
 @class FIRAuthCredential;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -24,6 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
     @brief Utility class used to construct @c NSError instances.
  */
 @interface FIRAuthErrorUtils : NSObject
+
++ (NSError *)errorWithCode:(FIRAuthInternalErrorCode)code
+                   message:(nullable NSString *)message;
 
 /** @fn RPCRequestEncodingErrorWithUnderlyingError
     @brief Constructs an @c NSError with the @c FIRAuthInternalErrorCodeRPCRequestEncodingError
@@ -466,6 +472,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSError *)notificationNotForwardedError;
 
+#if TARGET_OS_IOS
+/** @fn secondFactorRequiredError
+    @brief Constructs an @c NSError with the @c FIRAuthErrorCodeSecondFactorRequired code.
+    @return The NSError instance associated with the given FIRAuthError.
+ */
++ (NSError *)secondFactorRequiredErrorWithPendingCredential:(NSString *)MFAPendingCredential
+                                                      hints:(NSArray<FIRMultiFactorInfo *> *)multiFactorInfo;
+#endif
+
 /** @fn appNotVerifiedErrorWithMessage:
     @brief Constructs an @c NSError with the @c FIRAuthErrorCodeAppNotVerified code.
     @param message Error message from the backend, if any.
@@ -555,6 +570,13 @@ NS_ASSUME_NONNULL_BEGIN
         a string partially comprised of this value.
  */
 + (NSError *)keychainErrorWithFunction:(NSString *)keychainFunction status:(OSStatus)status;
+
+/** @fn missingOrInvalidNonceErrorWithMessage:
+    @brief Constructs an @c NSError with the code and message provided.
+    @param message Error message from the backend, if any.
+    @return The nullable NSError instance associated with the given error message, if one is found.
+*/
++ (NSError *)missingOrInvalidNonceErrorWithMessage:(nullable NSString *)message;
 
 @end
 

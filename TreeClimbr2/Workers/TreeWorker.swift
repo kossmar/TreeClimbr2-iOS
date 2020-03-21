@@ -22,7 +22,7 @@ class TreeWorker: NSObject
         deleteImagesFromStorage(tree)
         deleteUserComments(tree)
         deleteUserPhotos(tree)
-        
+
         AppData.sharedInstance.treeNode
             .child(tree.treeID)
             .removeValue()

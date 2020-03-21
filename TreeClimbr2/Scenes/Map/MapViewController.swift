@@ -7,16 +7,29 @@
 
 
 import UIKit
+import MapKit
+import CoreLocation
+import Firebase
 
 protocol MapDisplayLogic: class
 {
-    func displaySomething(viewModel: Map.Something.ViewModel)
+    
 }
 
-class MapViewController: UIViewController, MapDisplayLogic
+class MapViewController: UIViewController, MapDisplayLogic, CLLocationManagerDelegate
 {
+    
     var interactor: MapBusinessLogic?
     var router: (NSObjectProtocol & MapRoutingLogic & MapDataPassing)?
+    
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var treeListButton: UIButton!
+    @IBOutlet weak var addTreeToLocationButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var menuView: UIView!
+    
+    var userCoordinate = CLLocationCoordinate2D()
+    var locationManager = CLLocationManager()
     
     // MARK: Object lifecycle
     
@@ -48,6 +61,7 @@ class MapViewController: UIViewController, MapDisplayLogic
         router.dataStore = interactor
     }
     
+    
     // MARK: Routing
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -65,21 +79,61 @@ class MapViewController: UIViewController, MapDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        doSomething()
+        mapView.delegate = self
     }
     
-    // MARK: Do something
-    
-    //@IBOutlet weak var nameTextField: UITextField!
-    
-    func doSomething()
+    override func viewDidAppear(_ animated: Bool)
     {
-        let request = Map.Something.Request()
-        interactor?.doSomething(request: request)
+        super.viewDidAppear(animated)
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        self.mapViewWillStartLoadingMap(self.mapView)
     }
     
-    func displaySomething(viewModel: Map.Something.ViewModel)
+    override func viewWillAppear(_ animated: Bool)
     {
-        //nameTextField.text = viewModel.name
+        
     }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+
+    }
+    
+    func mapViewWillStartLoadingMap(_ mapView: MKMapView)
+    {
+
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        let location = locations[0]
+        let span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        userCoordinate = myLocation
+        let region: MKCoordinateRegion = MKCoordinateRegion(center: myLocation, span: span)
+        mapView.setRegion(region, animated: true)
+        mapView.showsUserLocation = true
+        locationManager.stopUpdatingLocation()
+    }
+
+}
+
+extension MapViewController: MKMapViewDelegate
+{
+    
+}
+
+extension MapViewController: MapFocusDelegate
+{
+    func focusOnTree(location: CLLocationCoordinate2D, tree: Tree)
+    {
+        
+    }
+    
+    
+}
+
+protocol MapFocusDelegate
+{
+    func focusOnTree(location: CLLocationCoordinate2D, tree: Tree)
 }
