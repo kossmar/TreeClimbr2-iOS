@@ -27,7 +27,8 @@ class MapPresenter: MapPresentationLogic
     
     func presentTreeAnnotations(response: Map.ReadTrees.Response)
     {
-        let viewModel = Map.ReadTrees.ViewModel(treeAnnotationArr: response.treeAnnotationArr)
+        let treeAnnotationArr: [TreeAnnotation] = TreeWorker.createTreeAnnotations(treesArr: response.treeArr)
+        let viewModel = Map.ReadTrees.ViewModel(treeAnnotationArr: treeAnnotationArr)
         viewController?.displayTreeAnnotations(viewModel: viewModel)
     }
 }

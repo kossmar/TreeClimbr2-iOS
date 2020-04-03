@@ -196,7 +196,6 @@ class TreeWorker: NSObject
         }
     }
     
-    //    class func read(completion: @escaping ([Tree]?) -> Void) {
     class func read(completion: @escaping ([Tree]?) -> Void)
     {
         AppData.sharedInstance
@@ -255,7 +254,6 @@ class TreeWorker: NSObject
                 
                 print("\(#function) - \(AppData.sharedInstance.treesArr.count)")
                 completion(AppData.sharedInstance.treesArr)
-//                completion()
                 
             })
     }
@@ -263,8 +261,7 @@ class TreeWorker: NSObject
     class func createTreeAnnotations(treesArr: [Tree]) -> [TreeAnnotation]
     {
         var treeAnnotationArr = [TreeAnnotation]()
-        //            guard
-        //                let trees = trees else { return }
+
         for tree in treesArr
         {
             let treeLat = tree.treeLatitude
@@ -274,7 +271,6 @@ class TreeWorker: NSObject
             treeAnn.title = tree.treeName
             treeAnn.tree = tree
             treeAnnotationArr.append(treeAnn)
-            //                self.mapView.addAnnotation(treeAnn)
         }
         return treeAnnotationArr
     }
@@ -314,8 +310,8 @@ class TreeWorker: NSObject
             .observeSingleEvent(of: .value , with: { (snapshot) in
                 let photos = snapshot
                     .children
-                    .flatMap { $0 as? DataSnapshot }
-                    .flatMap { $0.value as? [String:Any] }
+                    .compactMap { $0 as? DataSnapshot }
+                    .compactMap { $0.value as? [String:Any] }
                 
                 for photo in photos {
                     let userIDKey = photo["userIDKey"] as! String
@@ -339,8 +335,8 @@ class TreeWorker: NSObject
             .observeSingleEvent(of: .value , with: { (snapshot) in
                 let treePhotos = snapshot
                     .children
-                    .flatMap { $0 as? DataSnapshot }
-                    .flatMap { $0.value as? [String:Any] }
+                    .compactMap { $0 as? DataSnapshot }
+                    .compactMap { $0.value as? [String:Any] }
                 
                 // For each photo, delete the image from storage
                 for photo in treePhotos {

@@ -31,6 +31,7 @@
 		0DE7F07A24255D64008843DA /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7F07924255D64008843DA /* AppData.swift */; };
 		0DE7F0802425838E008843DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DE7F07F2425838E008843DA /* GoogleService-Info.plist */; };
 		0DE7F0832426A15A008843DA /* Notification Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7F0822426A15A008843DA /* Notification Extensions.swift */; };
+		0DE7F0862426D66F008843DA /* MapVCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7F0852426D66F008843DA /* MapVCExtensions.swift */; };
 		21A1C2268A0D4E1B55AB15AB /* Pods_TreeClimbr2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385C9A322E41210414D0A659 /* Pods_TreeClimbr2Tests.framework */; };
 		3E27F21290E5B2530BD624E4 /* Pods_TreeClimbr2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8B707E0CF1D83232E25D71 /* Pods_TreeClimbr2.framework */; };
 /* End PBXBuildFile section */
@@ -74,6 +75,7 @@
 		0DE7F07924255D64008843DA /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		0DE7F07F2425838E008843DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0DE7F0822426A15A008843DA /* Notification Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Notification Extensions.swift"; path = "../Notification Extensions.swift"; sourceTree = "<group>"; };
+		0DE7F0852426D66F008843DA /* MapVCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVCExtensions.swift; sourceTree = "<group>"; };
 		19E8357AE3803D70C452D7F0 /* Pods-TreeClimbr2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TreeClimbr2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TreeClimbr2Tests/Pods-TreeClimbr2Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		378DDE928F5E2DBBC259C7B8 /* Pods-TreeClimbr2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TreeClimbr2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TreeClimbr2/Pods-TreeClimbr2.debug.xcconfig"; sourceTree = "<group>"; };
 		385C9A322E41210414D0A659 /* Pods_TreeClimbr2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TreeClimbr2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +157,7 @@
 			children = (
 				0DE7F0512424540C008843DA /* Map.storyboard */,
 				0DE7F05724245AD5008843DA /* MapViewController.swift */,
+				0DE7F0852426D66F008843DA /* MapVCExtensions.swift */,
 				0DE7F05824245AD5008843DA /* MapInteractor.swift */,
 				0DE7F05324245AD5008843DA /* MapPresenter.swift */,
 				0DE7F05424245AD5008843DA /* MapWorker.swift */,
@@ -417,6 +420,7 @@
 				0DE7F05D24245AD5008843DA /* MapViewController.swift in Sources */,
 				0DE7F05B24245AD5008843DA /* MapRouter.swift in Sources */,
 				0DE7F0662424670C008843DA /* Tree.swift in Sources */,
+				0DE7F0862426D66F008843DA /* MapVCExtensions.swift in Sources */,
 				0DE7F05924245AD5008843DA /* MapPresenter.swift in Sources */,
 				0DE7F068242467BC008843DA /* Comment.swift in Sources */,
 				0DE7F07824255CF2008843DA /* TreeWorker.swift in Sources */,

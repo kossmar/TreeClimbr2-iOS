@@ -34,7 +34,6 @@ class MapViewController: UIViewController, MapDisplayLogic
     
     
     // MARK: Object lifecycle
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
     {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -48,7 +47,6 @@ class MapViewController: UIViewController, MapDisplayLogic
     }
     
     // MARK: Setup
-    
     private func setup()
     {
         let viewController = self
@@ -65,7 +63,6 @@ class MapViewController: UIViewController, MapDisplayLogic
     
     
     // MARK: Routing
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if let scene = segue.identifier {
@@ -77,12 +74,12 @@ class MapViewController: UIViewController, MapDisplayLogic
     }
     
     // MARK: View lifecycle
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         mapView.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(onDidUpdateLocation(_:)), name: Notification.Name.didUpdateLocation, object: nil)
+        setupLongPressGesture()
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -101,12 +98,9 @@ class MapViewController: UIViewController, MapDisplayLogic
     {
         super.viewWillDisappear(true)
         AppUtility.lockOrientation(.all)
-        //TODO: What is this doing?
-//        guard let someHandle = handle else {return}
-//        Auth.auth().removeStateDidChangeListener(someHandle)
-
     }
     
+    // MARK: Get Trees
     func getTrees()
     {
         interactor?.getTrees()
@@ -117,7 +111,20 @@ class MapViewController: UIViewController, MapDisplayLogic
         mapView.addAnnotations(viewModel.treeAnnotationArr)
     }
     
+    // MARK: Get User Region
+    func getUserRegion()
+    {
+        let request = Map.CenterToUser.Request(userLocation: mapView.userLocation)
+        interactor?.getUserRegion(request: request)
+    }
     
+    func displayUserRegion(viewModel: Map.CenterToUser.ViewModel)
+    {
+        self.mapView.setRegion(viewModel.region, animated: true)
+        self.mapView.userTrackingMode = .follow
+    }
+    
+    // MARK: Notification Observer
     @objc func onDidUpdateLocation(_ notification: Notification)
     {
         if let data = notification.userInfo as? [String:MKCoordinateRegion]
@@ -129,35 +136,30 @@ class MapViewController: UIViewController, MapDisplayLogic
             }
         }
     }
+    
+    // MARK: Tap Gesture Methods
+    func setupLongPressGesture()
+    {
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(locationLongPressed(longPressGestureRecognizer:)))
+        mapView.isUserInteractionEnabled = true
+        mapView.addGestureRecognizer(longPressGestureRecognizer)
+    }
+    
+    @objc func locationLongPressed(longPressGestureRecognizer: UILongPressGestureRecognizer)
+    {
+//        let touchPoint = longPressGestureRecognizer.location(in: self.mapView)
+//        let annCoordinates = self.mapView.convert(touchPoint, toCoordinateFrom: self.mapView)
+//        treeLocation = annCoordinates
+//        self.performSegue(withIdentifier: "toNewTree", sender: self.view)
+    }
+    
 
+    // MARK: Actions
     @IBAction func centerToUser(_ sender: Any)
     {
-        let request = Map.CenterToUser.Request(userLocation: mapView.userLocation)
-        interactor?.getUserRegion(request: request)
-    }
-    
-    func displayUserRegion(viewModel: Map.CenterToUser.ViewModel)
-    {
-        self.mapView.setRegion(viewModel.region, animated: true)
-        self.mapView.userTrackingMode = .follow
+        getUserRegion()
     }
 }
 
 
-extension MapViewController: MKMapViewDelegate
-{
-    
-}
 
-extension MapViewController: MapFocusDelegate
-{
-    func focusOnTree(location: CLLocationCoordinate2D, tree: Tree)
-    {
-        
-    }
-}
-
-protocol MapFocusDelegate
-{
-    func focusOnTree(location: CLLocationCoordinate2D, tree: Tree)
-}

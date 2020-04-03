@@ -41,8 +41,7 @@ class MapInteractor: MapBusinessLogic, MapDataStore
     func getTrees()
     {
         TreeWorker.read(completion: { trees in
-            let treeAnnotationArr: [TreeAnnotation] = TreeWorker.createTreeAnnotations(treesArr: trees!)
-            let response = Map.ReadTrees.Response(treeAnnotationArr: treeAnnotationArr)
+            let response = Map.ReadTrees.Response(treeArr: trees!)
             self.presenter?.presentTreeAnnotations(response: response)
         })
     }

@@ -36,7 +36,7 @@ enum Map
         }
         struct Response
         {
-            let treeAnnotationArr: [TreeAnnotation]
+            let treeArr: [Tree]
         }
         struct ViewModel
         {
